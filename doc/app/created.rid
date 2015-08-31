@@ -1,0 +1,6 @@
+Mon, 31 Aug 2015 02:12:51 -0300
+README.rdoc	Fri, 28 Aug 2015 18:42:37 -0300
+app/controllers/application_controller.rb	Sat, 29 Aug 2015 23:29:25 -0300
+app/controllers/images_controller.rb	Mon, 31 Aug 2015 02:03:11 -0300
+app/helpers/application_helper.rb	Mon, 31 Aug 2015 01:29:59 -0300
+app/models/image.rb	Mon, 31 Aug 2015 02:00:17 -0300
