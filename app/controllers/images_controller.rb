@@ -1,5 +1,6 @@
 class ImagesController < ApplicationController
   def index
+    @images = Image.all #TODO paginacion con KAMINARY
   end
 
   def new
