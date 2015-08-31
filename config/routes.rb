@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
-  get '/imagenes' => 'images#index'
-  get '/imagenes/new' => 'images#new'
+  # get '/imagenes' => 'images#index'
+  # get '/imagenes/new' => 'images#new', as: :new_image
+
+  # El siguiente codigo genera todas las rutas posibles
+  # resources :images
+
+  # como aun no las soportamos todas, lo hacemos de la siguiente forma
+  resources :images, only: [:index, :new, :create], path: '/imagenes'
 end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
