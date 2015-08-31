@@ -5,7 +5,7 @@ es:
     city_exploration: 'Explorando la ciudad'
     nature: 'Naturaleza'
     animals: 'Animales'
-    
+
   images:
     index:
       title: 'Imágenes'
@@ -13,3 +13,8 @@ es:
 
     new:
       title: 'Nueva %{model}'
+      form:
+        error: 'Ha ocurrido un error al intentar crear la %{model}'
+
+    create:
+      created: 'La %{model} ha sido creada.'

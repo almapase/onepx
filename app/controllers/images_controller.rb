@@ -6,16 +6,16 @@ class ImagesController < ApplicationController
     @image = Image.new
   end
 
-  # ANTES SE PODIA HACE ASÍ
-  # def create
-  #   @image = Image.new params[:image]
-  # end
-
   def create
     @image = Image.new secure_params
-    @image.save
 
-    redirect_to images_path
+    #Pregunta si no hay errores al guardar
+    if @image.save
+      return redirect_to images_path, notice: t('.created', model: @image.class.model_name.human)
+      #notice captura cuando algo sucedio bien, usando flash registro de llave, valor
+    end
+
+    render :new # me vuelve a mostrar la pagina de NEW manteniendo los datos
   end
 
   private
@@ -23,4 +23,3 @@ class ImagesController < ApplicationController
     params.require(:image).permit :name, :description, :category, :tags_text
   end
 end
-#index, show, new, create, edit, update, destroy
