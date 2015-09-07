@@ -1,4 +1,5 @@
-== README
+README
+==============================================
 
 Application OnePx made in the course of Ruby and rails on Platzi.com.
 This this App emulates a little functionality of de site 500px.com
@@ -40,7 +41,7 @@ para revisar que ruby hay instalado:
     ~ rvm list
 
 ###Definimos el Gemset del proyecto
-creamos el Gemset: *Gemset_onepx* en este caso, y le decimos que lo use todo en el mismo comando:
+creamos el Gemset: **Gemset_onepx** en este caso, y le decimos que lo use todo en el mismo comando:
 
     ~ rvm use 2.2.1@Gemset_onepx --create
 
@@ -59,7 +60,7 @@ para saber los gemset instalados:
 
 ---
 
-#Creamos un nuevo proyecto llamado ONEPX será un clon de 500px.com
+##Creamos un nuevo proyecto llamado ONEPX será un clon de 500px.com
 Nos unbicamos en el directorio que deceamos
 
     ~ cd onedrive/platzi/ror
@@ -97,7 +98,7 @@ Usamos la primera tarea para crear la base de datos en el motor:
     ~ rake db:drop db:create db:migrate
 
 El ultimo comando nos arroja el siguiente error:
-*could not connect to server: No such file or directory*
+**could not connect to server: No such file or directory**
 SOLUCIONAMOS con los siguientes comandos:
 
     ~ sudo mkdir /var/pgsql_socket/
@@ -115,20 +116,20 @@ Otro error: faltan las password de Postgres
 
 Error, al tratar de ver la vista en el browser:
 
-    *AbstractController::Helpers::MissingHelperError in ImagesController#index*
+    **AbstractController::Helpers::MissingHelperError in ImagesController#index**
 
 Luego de investigar nos damos cuenta que es un error mayusculas iniciales en los nombres de las carpetas
-si ejecutamos el *IRB* y corremos el comando:
+si ejecutamos el **IRB** y corremos el comando:
 
     File.expand_path("./")
     => /Users/almapase/OneDrive/Platzi/ror/onepx
 
-salimos de *IRB* y ejecutamos
+salimos de **IRB** y ejecutamos
 
     ~ pwd
     => /Users/almapase/onedrive/platzi/ror/onepx
 
-SOLUCION, los dos comandos anteriores muestran la carpera ror en en minusculas pero en realidad es así: *RoR*:
+SOLUCION, los dos comandos anteriores muestran la carpera ror en en minusculas pero en realidad es así: **RoR**:
 
     ~ cd onedrive/platzi
     ~ mv RoR ror
@@ -139,7 +140,7 @@ para eso haremos una migración
 
     ~ rails g migration add_hstore
 
-Esto nos genera un rarchivo *20150830162955_add_hstore.rb* en el directorio => db/migrate
+Esto nos genera un rarchivo **20150830162955_add_hstore.rb** en el directorio => db/migrate
 El archivo debe tener el siguiente codigo:
 
     class AddHstore < ActiveRecord::Migration
@@ -186,8 +187,8 @@ Hora ejecutamos la migración:
 
 ---
 #Ahora trabajaremos con nuestro modelo
-en el archivo *image.rb* colocamos el siguente codigo, que nos permitira darle nombre a las categorias
-por medio de un *enumerable*
+en el archivo **image.rb** colocamos el siguente codigo, que nos permitira darle nombre a las categorias
+por medio de un **enumerable**
 
     class Image < ActiveRecord::Base
       enum category: %w(portrait landscape city\ exploration nature animals)
@@ -260,7 +261,7 @@ Podemos crear un nuevo registro por medio de la consola de rails de la siguiente
     => true
 
 
-Ahora podemos consultar el objeto *i* enlazado al regustro de la base de datos
+Ahora podemos consultar el objeto **i** enlazado al regustro de la base de datos
 
     [13] pry(main)> i
     => #<Image:0x007fa54a43d6d0
@@ -272,7 +273,7 @@ Ahora podemos consultar el objeto *i* enlazado al regustro de la base de datos
      created_at: Sun, 30 Aug 2015 22:58:12 UTC +00:00,
      updated_at: Sun, 30 Aug 2015 22:58:12 UTC +00:00>
 
-Buscar dentro de la tabla imagenes los registros que contegan *lluv* dentro de la descripción
+Buscar dentro de la tabla imagenes los registros que contegan **lluv** dentro de la descripción
 
     [15] pry(main)> Image.where("description LIKE ?", "%lluv%")
       Image Load (22.1ms)  SELECT "images".* FROM "images" WHERE (description LIKE '%lluv%')
@@ -285,7 +286,7 @@ Buscar dentro de la tabla imagenes los registros que contegan *lluv* dentro de l
       created_at: Sun, 30 Aug 2015 22:58:12 UTC +00:00,
       updated_at: Sun, 30 Aug 2015 22:58:12 UTC +00:00>]
 
-Con esta centencia EXCLUSIVA DE PosgreSQL buscamos dentro del array del campo *tags*
+Con esta centencia EXCLUSIVA DE PosgreSQL buscamos dentro del array del campo **tags**
 
     [16] pry(main)> Image.where("? = ANY(tags)", "calles")
       Image Load (15.2ms)  SELECT "images".* FROM "images" WHERE ('calles' = ANY(tags))
@@ -298,7 +299,7 @@ Con esta centencia EXCLUSIVA DE PosgreSQL buscamos dentro del array del campo *t
       created_at: Sun, 30 Aug 2015 22:58:12 UTC +00:00,
       updated_at: Sun, 30 Aug 2015 22:58:12 UTC +00:00>]
 
-Todos los metodos diponibles para *Image*
+Todos los metodos diponibles para **Image**
 
     [17] pry(main)> Image.instance_methods
     => [:category=,
@@ -354,11 +355,11 @@ Si cerramos la consola debemos asegurarnos que usemos el GemSet correcto, cuando
 
 
 #Validando datos del formulario
-agregamos la siguiente linea en el archivo *image.rb* justo antes de la ¡s definiciones de metodos
+agregamos la siguiente linea en el archivo **image.rb** justo antes de la ¡s definiciones de metodos
 
     validates :name, presence: true # name tiene que ser requerido
 
-en el archivo *images_controller.rb* modoficamos el metodo *create*
+en el archivo **images_controller.rb** modoficamos el metodo **create**
 
     def create
         @image = Image.new secure_params
@@ -372,7 +373,7 @@ en el archivo *images_controller.rb* modoficamos el metodo *create*
         render :new # me vuelve a mostrar la pagina de NEW manteniendo los datos
     end
 
-En la carpeta *lib* creamos un archivo llamado *custom_form_builder.rb* con el siguuente contenido
+En la carpeta **lib** creamos un archivo llamado **custom_form_builder.rb** con el siguuente contenido
 
     class CustomFormBuilder < ActionView::Helpers::FormBuilder
         def form_error
@@ -394,12 +395,12 @@ En la carpeta *lib* creamos un archivo llamado *custom_form_builder.rb* con el s
         end
     end
 
-En el archivo *config/application.rb* agregar la siguiente linea:
+En el archivo **config/application.rb** agregar la siguiente linea:
 
     #Al arranar la aplicacion carge los archivos que estan el siguinte  directorio
     config.autoload_paths += %W(#{config.root}/lib)
 
-En el archivo *new.html.rb* modoficamos como sigue:
+En el archivo **new.html.rb** modoficamos como sigue:
 
     <%= form_for @image, builder: CustomFormBuilder do |form| %>
       <%= form.form_error %>
@@ -409,7 +410,7 @@ En el archivo *new.html.rb* modoficamos como sigue:
         <%= form.text_field :name %>
         <%= form.field_error :name %>
 
-En el archivo *app/views/layouts/application.html.erb* y agregamos el siguiente codigo en el <body>
+En el archivo **app/views/layouts/application.html.erb** y agregamos el siguiente codigo en el <body>
 
       <div id="flash">
         <% flash.each do |key, value| -%>
@@ -420,19 +421,19 @@ En el archivo *app/views/layouts/application.html.erb* y agregamos el siguiente 
       </div>
 
 #Optimiza para un listado de imágenes
-modificamos el INDEX del archivo *images_controler.rb*
+modificamos el INDEX del archivo **images_controler.rb**
 
     def index
         @images = Image.all #TODO paginacion con KAMINARY
       end
 
-modifificamos el *index.html.erb*
+modifificamos el **index.html.erb**
 
     <section class="images">
       <%= render @images %>
     </section>
 
-Creamos una vista partcial *_image.html.erb*
+Creamos una vista partcial **_image.html.erb**
 
     <div class="image-box">
       <div class="image-content">
@@ -441,11 +442,11 @@ Creamos una vista partcial *_image.html.erb*
     </div>
 
 #Creando nuestro archivo CSS
-Agregamos el archivo *app/assets/stylesheets/images.acss*
+Agregamos el archivo **app/assets/stylesheets/images.acss**
 
 #Configurar Carrierwave
 CarrierWave es una gema para cargar imagenes
-en el archivo *Gemfile* agregamos:
+en el archivo **Gemfile** agregamos:
 
 ```
 gem 'carrierwave'
@@ -454,17 +455,17 @@ tambien agregamos la gema
 ```
 gem 'mini_magick'
 ```
-esta gema sirve trabajar con la libreria *ImageMagick*, carrierwave
+esta gema sirve trabajar con la libreria **ImageMagick**, carrierwave
 utiliza ArcMagick para crear diferentes tamaños de una imagen.
 ArcMagick es una libreia escrita en C.
 
-Despues de ejecutar *bunble* para actualizar las gemas, ejecutamos:
+Despues de ejecutar **bunble** para actualizar las gemas, ejecutamos:
 ```
 rails g
 ```
-y revisamos que el generador *uploader* este en el listado de generadores
+y revisamos que el generador **uploader** este en el listado de generadores
 
-para crear un archivo de configuración de *carrierwave* ejecutamos
+para crear un archivo de configuración de **carrierwave** ejecutamos
 lo siguiente:
 ```
 ~ rails g uploader Photo
@@ -536,7 +537,7 @@ def secure_params
     :photo
 end
 ```
-Ahora instalamos *ImageMagick* aquí instrucciones: http://www.imagemagick.org/script/binary-releases.php
+Ahora instalamos **ImageMagick** aquí instrucciones: http://www.imagemagick.org/script/binary-releases.php
 ```
 ~ brew install ImageMagick
 
