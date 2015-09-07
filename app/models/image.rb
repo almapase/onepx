@@ -1,4 +1,6 @@
 class Image < ActiveRecord::Base
+  mount_uploader :photo, PhotoUploader
+  
   enum category: %w(portrait landscape city\ exploration nature animals)
 
   validates :name, presence: true

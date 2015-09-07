@@ -444,3 +444,132 @@ Creamos una vista partcial *_image.html.erb*
 Agregamos el archivo *app/assets/stylesheets/images.acss*
 
 #Configurar Carrierwave
+CarrierWave es una gema para cargar imagenes
+en el archivo *Gemfile* agregamos:
+
+```
+gem 'carrierwave'
+```
+tambien agregamos la gema
+```
+gem 'mini_magick'
+```
+esta gema sirve trabajar con la libreria *ImageMagick*, carrierwave
+utiliza ArcMagick para crear diferentes tamaños de una imagen.
+ArcMagick es una libreia escrita en C.
+
+Despues de ejecutar *bunble* para actualizar las gemas, ejecutamos:
+```
+rails g
+```
+y revisamos que el generador *uploader* este en el listado de generadores
+
+para crear un archivo de configuración de *carrierwave* ejecutamos
+lo siguiente:
+```
+~ rails g uploader Photo
+
+RESULTADO:
+  create  app/uploaders/photo_uploader.rb
+```
+en el archivo creado descomentamos:
+```
+include CarrierWave::MiniMagick
+```
+para definir una imagen por defecto utilizamos la siguiente funcion:
+```
+def default_url
+    ActionController::Base.helpers.asset_path("default.png")
+end
+```
+para definir las extensiones por defecto utilizamos la funcion:
+```
+def extension_white_list
+  %w(jpg jpeg gif png)
+end
+```
+para crear diferentes versiones, lo hacemos así
+```
+version :medium do
+  process :resize_to_fill => [850, 850]
+end
+
+version :thumb do
+  process :resize_to_fill => [250, 250]
+end
+```
+Ahora vamos al modelo de Image y agregamos la referencia para carrierwave
+```
+mount_uploader :photo, PhotoUploader
+```
+Ahora debemos agregar el atributo photo a la base de datos, para esto generamos la siguiente migración:
+```
+~ rails g migration add_photo_to_images photo
+```
+nos genera la siguiente migracion:
+```
+class AddPhotoToImages < ActiveRecord::Migration
+  def change
+    add_column :images, :photo, :string
+  end
+end
+```
+Ejecutamos la migración:
+```
+~ rake db:migrate
+```
+para mostrar las imagenes modificamos la vista  parcial de image.
+```
+<%= image_tag image.photo.thumb.url %>
+```
+Ahora modificaremos el formulario para cargar una imagen
+```
+<div class="field">
+  <%= form.label :photo %>
+  <%= form.file_field :photo %>
+</div>
+```
+En el ocntrolador agregamos photo a los parametros permitidos:
+```
+def secure_params
+  params.require(:image).permit :name, :description, :category, :tags_text,
+    :photo
+end
+```
+Ahora instalamos *ImageMagick* aquí instrucciones: http://www.imagemagick.org/script/binary-releases.php
+```
+~ brew install ImageMagick
+
+RESULTADO:
+==> Installing dependencies for imagemagick: xz, jpeg, libpng, libtiff, freetype
+==> Installing imagemagick dependency: xz
+==> Downloading https://homebrew.bintray.com/bottles/xz-5.2.1.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring xz-5.2.1.yosemite.bottle.tar.gz
+🍺  /usr/local/Cellar/xz/5.2.1: 59 files, 1.7M
+==> Installing imagemagick dependency: jpeg
+==> Downloading https://homebrew.bintray.com/bottles/jpeg-8d.yosemite.bottle.2.tar.gz
+######################################################################## 100.0%
+==> Pouring jpeg-8d.yosemite.bottle.2.tar.gz
+🍺  /usr/local/Cellar/jpeg/8d: 18 files, 776K
+==> Installing imagemagick dependency: libpng
+==> Downloading https://homebrew.bintray.com/bottles/libpng-1.6.18.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring libpng-1.6.18.yosemite.bottle.tar.gz
+🍺  /usr/local/Cellar/libpng/1.6.18: 17 files, 1.2M
+==> Installing imagemagick dependency: libtiff
+==> Downloading https://homebrew.bintray.com/bottles/libtiff-4.0.4.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring libtiff-4.0.4.yosemite.bottle.tar.gz
+🍺  /usr/local/Cellar/libtiff/4.0.4: 257 files, 3.9M
+==> Installing imagemagick dependency: freetype
+==> Downloading https://homebrew.bintray.com/bottles/freetype-2.6_1.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring freetype-2.6_1.yosemite.bottle.tar.gz
+🍺  /usr/local/Cellar/freetype/2.6_1: 60 files, 2.6M
+==> Installing imagemagick
+==> Downloading https://homebrew.bintray.com/bottles/imagemagick-6.9.1-10.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring imagemagick-6.9.1-10.yosemite.bottle.tar.gz
+🍺  /usr/local/Cellar/imagemagick/6.9.1-10: 1447 files, 22M
+```

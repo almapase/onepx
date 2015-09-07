@@ -26,6 +26,10 @@
     <%= form.text_field :tags_text %>
   </div>
   <div class="field">
+    <%= form.label :photo %>
+    <%= form.file_field :photo %>
+  </div>
+  <div class="field">
     <%= form.submit %>
   </div>
 <% end %>
