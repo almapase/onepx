@@ -1,7 +1,7 @@
 == README
 
-Application OnePx made in the course of Ruby and rails on [Platzi](www.Platzi.com).
-This this App emulates a little functionality of de site (500px.com)[www.500px.com]
+Application OnePx made in the course of Ruby and rails on Platzi.com.
+This this App emulates a little functionality of de site 500px.com
 
 * Ruby version: 2.2.1
 
@@ -59,7 +59,7 @@ para saber los gemset instalados:
 
 ---
 
-# Creamos un nuevo proyecto llamado ONEPX será un clon de 500px.com
+#Creamos un nuevo proyecto llamado ONEPX será un clon de 500px.com
 Nos unbicamos en el directorio que deceamos
 
     ~ cd onedrive/platzi/ror
@@ -439,3 +439,8 @@ Creamos una vista partcial *_image.html.erb*
         <h2><%= image.name %></h2>
       </div>
     </div>
+
+#Creando nuestro archivo CSS
+Agregamos el archivo *app/assets/stylesheets/images.acss*
+
+#Configurar Carrierwave
