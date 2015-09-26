@@ -2,34 +2,34 @@
 
 <h1><%= t('.title', model: model_name)%></h1>
 
-<%= form_for @image, builder: CustomFormBuilder do |form| %>
+<%= form_for @image, html: {class: 'pure-form pure-form-aligned'}, builder: CustomFormBuilder do |form| %>
   <%= form.form_error %>
 
-  <div class="field">
+  <div class="pure-control-group">
     <%= form.label :name %>
     <%= form.text_field :name %>
     <%= form.field_error :name %>
 
   </div>
-  <div class="field">
+  <div class="pure-control-group">
     <%= form.label :description %>
     <%= form.text_area :description %>
   </div>
-  <div class="field">
+  <div class="pure-control-group">
     <%= form.label :category %>
     <!-- SIN TRADUCIÓN
     <%= form.collection_select :category, Image.categories, :last, :first %> -->
     <%= form.collection_select :category, image_categories, :last, :first %>
   </div>
-  <div class="field">
+  <div class="pure-control-group">
     <%= form.label :tags_text %>
     <%= form.text_field :tags_text %>
   </div>
-  <div class="field">
+  <div class="pure-control-group">
     <%= form.label :photo %>
     <%= form.file_field :photo %>
   </div>
-  <div class="field">
-    <%= form.submit %>
+  <div class="pure-control">
+    <%= form.submit class: 'pure-button pure-button-primary'%>
   </div>
 <% end %>

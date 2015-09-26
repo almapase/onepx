@@ -140,7 +140,7 @@ para eso haremos una migración
 
     ~ rails g migration add_hstore
 
-Esto nos genera un rarchivo **20150830162955_add_hstore.rb** en el directorio => db/migrate
+Esto nos genera un rarchivo **20150830162955_add_hstore.rb** en el directorio => **db/migrate**
 El archivo debe tener el siguiente codigo:
 
     class AddHstore < ActiveRecord::Migration
@@ -531,7 +531,7 @@ Ahora modificaremos el formulario para cargar una imagen
 </div>
 ```
 En el ocntrolador agregamos photo a los parametros permitidos:
-```
+```ruby
 def secure_params
   params.require(:image).permit :name, :description, :category, :tags_text,
     :photo
@@ -574,3 +574,17 @@ RESULTADO:
 ==> Pouring imagemagick-6.9.1-10.yosemite.bottle.tar.gz
 🍺  /usr/local/Cellar/imagemagick/6.9.1-10: 1447 files, 22M
 ```
+
+# Assets Pipeline
+framework CSS www.purecss.io
+descargamos el archivo minificado
+```
+~/onepx/vendor/assets/stylesheets curl -O http://yui.yahooapis.com/pure/0.6.0/pure-min.css
+```
+Agregamos al archivo **app/assets/stylesheets/application.css**
+```
+*= require pure-min
+```
+# Autentificacion
+Usaremos la gema de generadores https://github.com/mariochavez/mac_generators
+que nos ayudara a trabajar con autenticación sin usar una gema especifica 
