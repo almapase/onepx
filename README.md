@@ -587,4 +587,5 @@ Agregamos al archivo **app/assets/stylesheets/application.css**
 ```
 # Autentificacion
 Usaremos la gema de generadores https://github.com/mariochavez/mac_generators
-que nos ayudara a trabajar con autenticación sin usar una gema especifica 
+que nos ayudara a trabajar con autenticación sin usar una gema especifica.
+Agregamos **gem 'mac_generators'** en nuestro archivo  
